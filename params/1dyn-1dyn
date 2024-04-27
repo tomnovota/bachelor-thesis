@@ -1,0 +1,27 @@
+log/analysis/1dyn-1dyn/ # [string] filename
+0.1 # [double] timestep
+0.75 # [double] body_width
+1.2 # [double] speed_median
+0.26 # [double] speed_std
+0.6 # [double] speed_trim
+0 # [double] R_crit
+2 # [double] R_max
+0 # [double] d1_dir
+5 # [double] d2_dir
+0 # [double] d1_op
+5 # [double] d2_op
+0.75 # [double] c_back
+1.95 # [double] c_front
+20 # [double] distance fd1
+0 # [double] distance tasep
+0 # [double] distance fd2
+0 # [double] time_intervalB
+0 # [double] time_intervalL
+0 # [double] lambdaB
+0 # [double] lambdaL
+0 # [enum] kernels
+
+1 1 0  # id, v_opt(+/-), departure
+2 -1 0  # id, v_opt(+/-), departure
+
+

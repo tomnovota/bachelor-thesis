@@ -1,0 +1,29 @@
+log/hetero-hetero/hetero-hetero4/ # [string] filename
+0.1 # [double] timestep
+0.75 # [double] body_width
+1.2 # [double] speed_median
+0.26 # [double] speed_std
+0.45 # [double] speed_trim
+4 # [double] R_crit
+14 # [double] R_max
+0 # [double] d1_dir
+5 # [double] d2_dir
+0 # [double] d1_op
+5 # [double] d2_op
+0.75 # [double] c_back
+1.95 # [double] c_front
+150 # [double] distance fd1
+0 # [double] distance tasep
+0 # [double] distance fd2
+1500 # [double] time_intervalB
+1500 # [double] time_intervalL
+0.5 # [double] lambdaB
+0.5 # [double] lambdaL
+0 # [enum] kernels
+
+
+
+id, v_opt, departure # v_opt i záporná
+
+id, position, type # type 0/1 
+
