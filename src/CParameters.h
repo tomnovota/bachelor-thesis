@@ -44,6 +44,9 @@ class CParameters
 
     void ReadArrivals ( std::ifstream & ifs );
 
+    void ReadNonHomoB ( std::ifstream & ifs );
+    void ReadNonHomoL ( std::ifstream & ifs );
+
     void ReadParams ( std::ifstream & ifs );
 
     template< typename T_ >
@@ -79,6 +82,9 @@ class CParameters
     double m_Time_IntervalL = 1200;
     double m_LambdaB = 0.33;
     double m_LambdaL = 0.33;
+
+    std::vector< double > m_PCoeffsB;
+    std::vector< double > m_PCoeffsL;
 
     int m_Kernels = 0;
 

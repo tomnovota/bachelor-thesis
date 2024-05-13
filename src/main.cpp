@@ -14,9 +14,10 @@ int main ( int argc, char ** argv )
         iter_count = std::stoi ( argv [ 1 ] );
         filename = argv [ 2 ];
     }
-    if ( argc > 3 )
+    if ( argc > 3 && std::stoi ( argv [ 3 ] ) == 1 )
+    {
         CTransport::WRITE_TRAJECT = true;
-
+    }
     CParameters parser;
     try
     {

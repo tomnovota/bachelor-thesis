@@ -170,6 +170,19 @@ def ff():
     for ker in kernels:
         plot_transport(data_cnt[ker], data_velo[ker], ker, dist, velo, False, f'results/{param_type}_{ker}')
         
-ff()
+def ff2():
+    sim_file = './simulation'
+    param_dir = 'params/'
+    param_types = ["1-nonhomo", "2-nonhomo", "3-nonhomo"]
+    iter_cnt = 10
+    run = True
+    for i in range(1, 5):
+        for param_type in param_types:
+            if run == True:
+                process = subprocess.Popen([ sim_file, str(iter_cnt), param_dir + f'{param_type}{i}' ])
+                process.wait()
+# ff()
+
+ff2()
         
         

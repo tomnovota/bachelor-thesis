@@ -3,10 +3,10 @@
 double CArrivalGenerator::CalcValue ( double time, const std::vector< double > & coeffs )
 {
     double res = 0;
-    int deg = 0;
+    // int deg = 0;
     for ( const auto & coef : coeffs )
     {
-        res += coef * pow ( time, deg ++ );
+        res = res * time + coef;
     }
     return res;
 }
@@ -34,8 +34,8 @@ std::vector< double > CArrivalGenerator::GenerateEvents ( double interval, doubl
         for ( auto time : events_homo )
         {
             prob = CalcValue ( time, coeffs ) / lambda;
-            std::binomial_distribution<> binom_d ( 1, prob );
-            if ( binom_d ( gen ) ) 
+            std::bernoulli_distribution bern_d ( prob );
+            if ( bern_d ( gen ) ) 
             {
                 events . push_back ( time );
             }

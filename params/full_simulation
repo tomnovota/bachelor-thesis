@@ -15,8 +15,8 @@ log/full/ # [string] filename
 50 # [double] distance fd1
 50 # [double] distance tasep
 50 # [double] distance fd2
-100 # [double] time_intervalB
-100 # [double] time_intervalL
-0.2 # [double] lambdaB
-0.2 # [double] lambdaL
+1000 # [double] time_intervalB
+1000 # [double] time_intervalL
+0.1 # [double] lambdaB
+0.1 # [double] lambdaL
 2 # [enum] kernels

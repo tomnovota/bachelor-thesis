@@ -10,7 +10,7 @@ epsilon = 1e-9
 ########################################################################
 param_file = "params/full_simulation"
 KERNEL = "triang1"
-INTENSITY = 5
+INTENSITY = 2
 
 # Read parameters
 with open(param_file, "r") as file:
@@ -196,15 +196,15 @@ ax4.set_ylabel("Pedestrian velocity")
 
 velocities11 = ax1.bar(POSITIONS_TRANSPORT1, np.zeros(len(POSITIONS_TRANSPORT1)), color='r', width=STEP)
 
-velocities12 = ax1.bar(POSITIONS_TRANSPORT1, np.zeros(len(POSITIONS_TRANSPORT1)), color='b', width=STEP)
+velocities12 = ax1.bar(POSITIONS_TRANSPORT1, np.zeros(len(POSITIONS_TRANSPORT1)), color='dodgerblue', width=STEP)
 
 tasep1 = ax3.bar(POSITIONS_BOTTLENECK, np.zeros(len(POSITIONS_BOTTLENECK)), color='r', width=STEP)
 
-tasep2 = ax3.bar(POSITIONS_BOTTLENECK, np.zeros(len(POSITIONS_BOTTLENECK)), color='b', width=STEP)
+tasep2 = ax3.bar(POSITIONS_BOTTLENECK, np.zeros(len(POSITIONS_BOTTLENECK)), color='dodgerblue', width=STEP)
 
 velocities21 = ax4.bar(POSITIONS_TRANSPORT2, np.zeros(len(POSITIONS_TRANSPORT2)), color='r', width=STEP)
 
-velocities22 = ax4.bar(POSITIONS_TRANSPORT2, np.zeros(len(POSITIONS_TRANSPORT2)), color='b', width=STEP)
+velocities22 = ax4.bar(POSITIONS_TRANSPORT2, np.zeros(len(POSITIONS_TRANSPORT2)), color='dodgerblue', width=STEP)
 
 counter = ax1.text(0.98, 0.96, "", transform=ax1.transAxes, fontsize=14,
                    verticalalignment='top', horizontalalignment='right',
@@ -280,6 +280,8 @@ def update(frame):
     for bar, y, id in zip(tasep2, Y3_[frame], IDs_[frame]):
         bar.set_height(y)
         ax3.annotate(f"{id}", (bar.get_x() + bar.get_width() / 2, y), ha='center', va='bottom', fontsize='15')
+        
+    tasep2[-1].set_height(0)
 
     # Aktualizace grafu s rychlostmi
     for bar, y in zip(velocities21, Y4[frame]):

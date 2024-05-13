@@ -46,7 +46,7 @@ void CConfigTransportOnly::Simulate ( std::shared_ptr< CMass > kernel, double in
     for ( double t_n = 0;
             ! ( t1 -> Finished() && waitingL . empty() )
             && t_n < interval_max;
-        t_n += m_Timestep )
+            t_n += m_Timestep )
     {
         t1 -> Step ( t_n );
         t1 -> Departure ( t_n );

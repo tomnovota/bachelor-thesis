@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <random>
+#include <iostream>
 
 class CArrivalGenerator
 {

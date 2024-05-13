@@ -13,6 +13,12 @@ std::shared_ptr< CConfig > CParameters::Read ( std::string filename )
     if ( ! m_Time_IntervalB && ! m_Time_IntervalL )
         ReadArrivals ( ifs );
 
+    if ( m_LambdaB < 0 && ! ( CMass::DBL_eq ( m_LambdaB, 0 ) ) )
+        ReadNonHomoB ( ifs );
+
+    if ( m_LambdaL < 0 && ! ( CMass::DBL_eq ( m_LambdaL, 0 ) ) )
+        ReadNonHomoL ( ifs );
+
     if ( ! m_Distance_Bottleneck )
         return OnlyTransport ( ifs );
 
@@ -27,6 +33,36 @@ std::shared_ptr< CConfig > CParameters::Read ( std::string filename )
     auto transport2 = std::make_shared< CTransportL > ( m_Distance_Transport1 + m_Distance_Bottleneck, Distance(), m_Timestep, m_R_crit, m_R_max );
 
     return std::make_shared< CConfigAll > ( m_Filename, GetKernels(), m_Timestep, transport1, transport2, bottleneck1, bottleneck2 );
+}
+
+void CParameters::ReadNonHomoB ( std::ifstream & ifs )
+{
+    std::string line;
+    std::getline ( ifs, line );
+    std::stringstream ss ( line );
+
+    m_LambdaB = std::abs ( m_LambdaB );
+
+    double tmp;
+    while ( ss >> tmp )
+    {
+        m_PCoeffsB . push_back ( tmp );
+    }
+}
+
+void CParameters::ReadNonHomoL ( std::ifstream & ifs )
+{
+    std::string line;
+    std::getline ( ifs, line );
+    std::stringstream ss ( line );
+
+    m_LambdaL = std::abs ( m_LambdaL );
+
+    double tmp;
+    while ( ss >> tmp )
+    {
+        m_PCoeffsL . push_back ( tmp );
+    }
 }
 
 std::shared_ptr< CConfig > CParameters::OnlyTransport ( std::ifstream & ifs )
@@ -144,11 +180,11 @@ void CParameters::ReadArrivals ( std::ifstream & ifs )
 
 std::vector< CPedestrian > CParameters::GenerateArrivalsB ( void )
 {
-    if ( ! ( m_WaitingB . empty() && m_WaitingL . empty() ) )
+    if ( ! m_Time_IntervalB && ! m_Time_IntervalL )
         return m_WaitingB;
 
     std::vector< CPedestrian > waiting;
-    auto events = CArrivalGenerator::GenerateEvents ( m_Time_IntervalB, m_LambdaB );
+    auto events = CArrivalGenerator::GenerateEvents ( m_Time_IntervalB, m_LambdaB, m_PCoeffsB );
     for ( size_t id = 0; id < events . size(); ++ id )
     {
         waiting . push_back ( CPedestrian ( id, events [ id ], 0, m_d1_dir, m_d2_dir, m_d1_op, m_d2_op, GetSpeed ( 1 ), m_Body_Width ) );
@@ -158,11 +194,11 @@ std::vector< CPedestrian > CParameters::GenerateArrivalsB ( void )
 
 std::vector< CPedestrian > CParameters::GenerateArrivalsL ( void )
 {
-    if ( ! ( m_WaitingB . empty() && m_WaitingL . empty() ) )
+    if ( ! m_Time_IntervalB && ! m_Time_IntervalL )
         return m_WaitingL;
 
     std::vector< CPedestrian > waiting;
-    auto events = CArrivalGenerator::GenerateEvents ( m_Time_IntervalL, m_LambdaL );
+    auto events = CArrivalGenerator::GenerateEvents ( m_Time_IntervalL, m_LambdaL, m_PCoeffsL );
     for ( size_t id = 0; id < events . size(); ++ id )
     {
         waiting . push_back ( CPedestrian ( id, events [ id ], Distance(), m_d1_dir, m_d2_dir, m_d1_op, m_d2_op,
