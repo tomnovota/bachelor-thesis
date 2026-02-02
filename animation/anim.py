@@ -10,7 +10,7 @@ epsilon = 1e-9
 ########################################################################
 param_file = "params/full_simulation"
 KERNEL = "triang1"
-INTENSITY = 2
+INTENSITY = 1
 
 # Read parameters
 with open(param_file, "r") as file:
@@ -282,6 +282,7 @@ def update(frame):
         ax3.annotate(f"{id}", (bar.get_x() + bar.get_width() / 2, y), ha='center', va='bottom', fontsize='15')
         
     tasep2[-1].set_height(0)
+    tasep1[-1].set_height(0)
 
     # Aktualizace grafu s rychlostmi
     for bar, y in zip(velocities21, Y4[frame]):
@@ -293,10 +294,10 @@ def update(frame):
 
 # Vytvoření animace
 print("Vytváření animace...")
-animation = FuncAnimation(fig, update, frames=len(Y1), interval=10)
+animation = FuncAnimation(fig, update, frames=len(Y1)//2, interval=50)
 
 print("Ukládání animace...")
-# animation.save("video/simulace_test2.mp4", writer='ffmpeg', fps=50)
+animation.save("video/simulace1.mp4", writer='ffmpeg', fps=60)
 
 print("Spuštění vizualizace...")
 plt.show()

@@ -5,7 +5,7 @@ log/full/ # [string] filename
 0.26 # [double] speed_std
 0.5 # [double] speed_trim
 4 # [double] R_crit
-14 # [double] R_max
+15 # [double] R_max
 0 # [double] d1_dir
 5 # [double] d2_dir
 0 # [double] d1_op
@@ -15,8 +15,8 @@ log/full/ # [string] filename
 50 # [double] distance fd1
 50 # [double] distance tasep
 50 # [double] distance fd2
-1000 # [double] time_intervalB
-1000 # [double] time_intervalL
-0.1 # [double] lambdaB
-0.1 # [double] lambdaL
+100 # [double] time_intervalB
+100 # [double] time_intervalL
+0.05 # [double] lambdaB
+0.05 # [double] lambdaL
 2 # [enum] kernels
